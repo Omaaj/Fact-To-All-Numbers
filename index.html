@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Facts</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0%;
+            margin: 0%;
+        }
+
+        body {
+            background-color: #444;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            top: 0;
+            left: 0%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .card {
+            background-color: black;
+            color: #fff;
+            margin: 30px;
+            padding: 20px 20px;
+            width: 450px;
+            box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h1 {
+            font-size: 32px;
+            font-weight: 549.9;
+        }
+
+        .container p {
+            margin-top: 5px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .card-body {
+            margin-top: 20px;
+            padding: 10px 15px;
+        }
+
+        #fact {
+            display: none;
+        }
+
+        .card-body h4 {
+            font-size: 18px;
+            font-weight: 300px;
+        }
+
+        .form-control {
+            border: 2px solid #fff;
+            outline: none;
+            width: 100%;
+            height: 30px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-top: 5px;
+            padding: 10px;
+        }
+
+        @media(max-width: 760px) {
+            .container .card {
+            padding: 5px 5px;
+            width: 250px;
+          }
+        } 
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="fact">
+                <div class="card">
+                    <h1>Number Facts</h1>
+                    <p>Enter a number and get a random fact</p>
+                    <input type="number" class="form-control" id="numberInput" placeholder="Enter any number...">
+                    <div id="fact" class="card-body">
+                        <h4>Number Fact</h4>
+                        <p id="factText" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fact = document.querySelector('#fact');
+        const factText = document.querySelector('#factText');
+
+        const numberInput = document.querySelector('#numberInput');
+        numberInput.addEventListener('input', getFactFetch);
+
+       //function getFactAjax() {
+         //  let number = numberInput.value;
+           
+           // let xhr = new XMLHttpRequest();
+          //  xhr.open('GET', 'http://numbersapi.com/'+number);
+
+           //xhr.onload = function() {
+             // if(this.status == 200 && number!= '') {
+               // fact.style.display ='block';
+                // factText.innerText = this.responseText;
+              // }
+           // }
+
+           // xhr.send();
+        // }
+        
+        function getFactFetch() {
+            const number = numberInput.value;
+
+            fetch('http://numbersapi.com/'+number)
+              .then(response => response.text())
+              .then(data => {
+                  if(number != ''){
+                    fact.style.display ='block';
+                    factText.innerText = data;
+                  }
+              })
+
+              .catch(err => console.log(err))
+        }
+    </script>
+</body>
+</html>
